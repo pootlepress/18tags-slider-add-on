@@ -49,11 +49,22 @@ class Pootle_Customisations {
 				'meta_key'       => '_thumbnail_id',
 			) ); ?>
 		<?php if ( have_posts() ) { ?>
-			<ul class="bxslider">
+			<style>
+				.bx-slider{display:none;}
+			</style>
+			<ul class="bx-slider">
 				<?php
 				while ( have_posts() ) {
 					the_post();
 					echo '<li><a href="' . get_permalink() . '">';
+					echo '<span class="bx-caption">';
+					the_title( '<h1>', '</h1>' );
+					if ( has_excerpt() ) {
+						echo '<p>';
+						the_excerpt();
+						echo '</p>';
+					}
+					echo '</span>';
 					the_post_thumbnail( 'full', 'title="' . get_the_title() . '"' );
 					echo '</a></li>';
 				} ?>
